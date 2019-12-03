@@ -145,7 +145,7 @@ if [ "$DBQUERY" -eq "1" ]; then
                         sudo systemctl stop elrond-node-$UPDATEINDEX
                         echo "Database Cleanup Called ! Erasing DB for elrond-node-$UPDATEINDEX..." >> $HOME/autoupdate.status
                         cleanup
-                        update
+                        upgrade
                         mv $UPDATEWORKDIR/config/prefs.toml.save $UPDATEWORKDIR/config/prefs.toml
                         sudo systemctl start elrond-node-$UPDATEINDEX       
                       done
@@ -158,7 +158,7 @@ if [ "$DBQUERY" -eq "1" ]; then
             cp $UPDATEWORKDIR/config/prefs.toml $UPDATEWORKDIR/config/prefs.toml.save
             sudo systemctl stop elrond-node-$UPDATEINDEX
             echo "Database Cleanup Not Needed for elrond-node-$UPDATEINDEX ! Moving to next step... " >> $HOME/autoupdate.status
-            update
+            upgrade
             mv $UPDATEWORKDIR/config/prefs.toml.save $UPDATEWORKDIR/config/prefs.toml
             sudo systemctl start elrond-node-$UPDATEINDEX
           done
