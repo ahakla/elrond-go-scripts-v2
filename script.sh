@@ -139,9 +139,9 @@ case "$1" in
   install_utils
   
   INSTALLEDNODES=$(cat $CUSTOM_HOME/.numberofnodes)  
-  curl --silent "https://api.github.com/repos/ElrondNetwork/elrond-go/releases/latest" | grep "body" > $HOME/tmp
+  body_txt=$(curl --silent "https://api.github.com/repos/ElrondNetwork/elrond-go/releases/latest" | grep "body")
   
-  if grep -q "*This release should start with a new DB*" "$HOME/tmp" 
+  if grep -q "*This release should start with a new DB*" "$body_txt"
                                         then DBQUERY=1
                             else DBQUERY=0 
                   fi
@@ -174,8 +174,7 @@ if [ "$DBQUERY" -eq "1" ]; then
             sudo systemctl start elrond-node-$UPDATEINDEX
           done
     fi
-
-    rm $HOME/tmp    
+    
   ;;
 
 'upgrade-remote')
